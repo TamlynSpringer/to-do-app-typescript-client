@@ -1,6 +1,6 @@
 import axios, { AxiosResponse} from 'axios';
 
-const baseUrl: string = 'https://localhost:1337'
+const baseUrl: string = 'http://localhost:1337';
 
 export const getTodos = async (): Promise<AxiosResponse<ApiDataType>> => {
   try {
@@ -9,7 +9,7 @@ export const getTodos = async (): Promise<AxiosResponse<ApiDataType>> => {
     )
     return todos
   } catch (error) {
-    throw new Error(error)
+    throw new Error('Error in getting todo')
   }
 };
 
@@ -22,13 +22,15 @@ export const addTodo = async (
       description: formData.description,
       status: false,
     }
+    console.log(todo)
     const saveTodo: AxiosResponse<ApiDataType> = await axios.post(
       baseUrl + '/add-todo',
       todo
     )
+    console.log(saveTodo, 'Save todo in addTodo')
     return saveTodo
   } catch (error) {
-    console.log(error)
+    throw new Error('Error in adding todo')
   }
 };
 
@@ -45,6 +47,19 @@ export const updateTodo = async (
     )
     return updatedTodo;
   } catch (error) {
-    console.log(error)
+    throw new Error('Error in updating todo')
+  }
+};
+
+export const deleteTodo = async (
+  _id: string
+): Promise<AxiosResponse<ApiDataType>> => {
+  try {
+    const deletedTodo: AxiosResponse<ApiDataType> = await axios.delete(
+      `${baseUrl}/delete-todo/${_id}`
+    )
+    return deletedTodo
+  } catch (error) {
+    throw new Error('Error in deleting todo')
   }
 };

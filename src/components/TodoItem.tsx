@@ -5,30 +5,29 @@ type Props = TodoProps & {
   deleteTodo: (_id: string) => void
 }
 
-const Todo: React.FC<Props> = ({ todo, updateTodo, deleteTodo }) => {
+const TodoItem: React.FC<Props> = ({ todo, updateTodo, deleteTodo }) => {
   const checkTodo: string = todo.status ? `line-through` : ''
   return (
     <main className='card'>
       <section className='card--text'>
-        <h1 className={checkTodo}>{todo.name}</h1>
+        <h2 className={checkTodo}>{todo.name}</h2>
         <span className={checkTodo}>{todo.description}</span>
       </section>
       <section className='card--button'>
         <button
           onClick={() => updateTodo(todo)}
-          className={todo.status ? `hide-button` : 'card--button__done'}
+          className={todo.status ? `hide-button` : ''}
         >
-          Complete
+          <i className="fa-solid fa-check"></i>
         </button>
         <button
           onClick={() => deleteTodo(todo._id)}
-          className='card--button__delete'
         >
-          Delete
+          <i className="fa-solid fa-xmark"> </i>
         </button>
       </section>
     </main>
   )
 };
 
-export default Todo;
+export default TodoItem;
