@@ -1,6 +1,6 @@
 import axios, { AxiosResponse} from 'axios';
 
-const baseUrl: string = 'http://localhost:1337';
+const baseUrl: string = 'https://ts-mern-todo.cyclic.app/' || 'http://localhost:1337';
 
 export const getTodos = async (): Promise<AxiosResponse<ApiDataType>> => {
   try {
